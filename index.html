@@ -30,26 +30,166 @@
 <section id="contact"><div class="wrap"><div class="banner"><div><h2>Prêt à commencer avec Genesis ?</h2><p>Contacte-nous pour connaître les tarifs, les disponibilités et les détails des formations.</p></div><a class="btn" id="contactWhatsApp" href="https://wa.me/237670853505" target="_blank" rel="noopener">💬 Écrire sur WhatsApp</a></div></div></section>
 </main><footer><div class="wrap"><div class="foot"><a class="brand" href="#accueil"><span class="mark">G</span><span>GENESIS<small>OFFICIAL SCHOOL</small></span></a><div class="footlinks"><a href="#formations">Formations</a><a href="#dvd">DVD disponibles</a><a href="#commentaires">Commentaires</a><a href="#contact">Contact</a></div></div><div class="copy">© <span id="year"></span> Genesis Official School · Apprendre · Protéger · Progresser</div></div></footer>
 <script>
-const WHATSAPP_NUMBER='237670853505';
-const products=[
- {img:'1000012432.png',title:'Investigator Specialist',desc:'Sécurité des télécoms, protection et investigation numérique légale.',tag:'Investigation numérique'},
- {img:'1000012434.png',title:'ATM Security Protection Expert',desc:'Principes de sécurité des guichets automatiques et prévention des risques.',tag:'Sécurité bancaire'},
- {img:'1000012436.jpg',title:'Financial Fraud Protection Expert',desc:'Prévention de la fraude financière et sécurisation des transactions.',tag:'Anti-fraude'},
- {img:'1000012437.jpg',title:'Network Intrusion Expert',desc:'Architecture réseau, détection et défense dans des environnements autorisés.',tag:'Sécurité réseau'},
- {img:'1000012438.jpg',title:'Cybersécurité bancaire',desc:'Bonnes pratiques de protection des transactions et des données financières.',tag:'Protection bancaire'},
- {img:'1000012439.jpg',title:'Sécuriser son crédit et forfait',desc:'Protection des services mobiles, comptes et informations télécoms.',tag:'Sécurité télécoms'},
- {img:'1000012442.jpg',title:'Cybersécurité des plateformes de paris',desc:'Comprendre les risques, la protection des comptes et les limites du hasard.',tag:'Protection des comptes'},
- {img:'1000012443.jpg',title:'Hacking de bases de données',desc:'Bases de données, requêtes et sécurité à étudier en laboratoire autorisé.',tag:'Bases de données'},
- {img:'1000012444.jpg',title:'Cybersécurité aérienne',desc:'Protection des systèmes numériques et principes de sécurité des réservations.',tag:'Sécurité des systèmes'},
- {img:'1000012445.jpg',title:'Cybersécurité des plateformes — édition pratique',desc:'Analyse statistique, protection des comptes et jeu responsable.',tag:'Analyse et prévention'},
- {img:'1000009046.jpg',title:'Techniques de cybersécurité éthique — Volume 1',desc:'Outils pratiques, notions de code source, exercices et tests éthiques.',tag:'Volume 1'},
- {img:'1000009045.jpg',title:'Techniques de cybersécurité éthique — Volume 2',desc:'Suite de la série : apprentissage pratique et protection numérique.',tag:'Volume 2'},
- {img:'1000009040.jpg',title:'Techniques de cybersécurité éthique — Volume 3',desc:'Troisième volume de la série de formation à la cybersécurité.',tag:'Volume 3'},
- {img:'1000008626.png',title:'Techniques de hacking des guichets bancaires — Volume 1',desc:'Support de sensibilisation à la sécurité bancaire et aux tests strictement autorisés.',tag:'Volume 1 · Sécurité bancaire'}
+ 
+const WHATSAPP_NUMBER = '237670853505';
+
+const products = [
+  {img:'1000012432.png',title:'Investigator Specialist',desc:'Sécurité des télécoms, protection et investigation numérique légale.',tag:'Investigation numérique'},
+  {img:'1000012434.png',title:'ATM Security Protection Expert',desc:'Principes de sécurité des guichets automatiques et prévention des risques.',tag:'Sécurité bancaire'},
+  {img:'1000012436.jpg',title:'Financial Fraud Protection Expert',desc:'Prévention de la fraude financière et sécurisation des transactions.',tag:'Anti-fraude'},
+  {img:'1000012437.jpg',title:'Network Intrusion Expert',desc:'Architecture réseau, détection et défense dans des environnements autorisés.',tag:'Sécurité réseau'},
+  {img:'1000012438.jpg',title:'Cybersécurité bancaire',desc:'Bonnes pratiques de protection des transactions et des données financières.',tag:'Protection bancaire'},
+  {img:'1000012439.jpg',title:'Sécuriser son crédit et forfait',desc:'Protection des services mobiles, comptes et informations télécoms.',tag:'Sécurité télécoms'},
+  {img:'1000012442.jpg',title:'Cybersécurité des plateformes de paris',desc:'Comprendre les risques, la protection des comptes et les limites du hasard.',tag:'Protection des comptes'},
+  {img:'1000012443.jpg',title:'Hacking de bases de données',desc:'Bases de données, requêtes et sécurité à étudier en laboratoire autorisé.',tag:'Bases de données'},
+  {img:'1000012444.jpg',title:'Cybersécurité aérienne',desc:'Protection des systèmes numériques et principes de sécurité des réservations.',tag:'Sécurité des systèmes'},
+  {img:'1000012445.jpg',title:'Cybersécurité des plateformes — édition pratique',desc:'Analyse statistique, protection des comptes et jeu responsable.',tag:'Analyse et prévention'},
+  {img:'1000009046.jpg',title:'Techniques de cybersécurité éthique — Volume 1',desc:'Outils pratiques, notions de code source, exercices et tests éthiques.',tag:'Volume 1'},
+  {img:'1000009045.jpg',title:'Techniques de cybersécurité éthique — Volume 2',desc:'Suite de la série : apprentissage pratique et protection numérique.',tag:'Volume 2'},
+  {img:'1000009040.jpg',title:'Techniques de cybersécurité éthique — Volume 3',desc:'Troisième volume de la série de formation à la cybersécurité.',tag:'Volume 3'},
+  {img:'1000008626.png',title:'Techniques de hacking des guichets bancaires — Volume 1',desc:'Support de sensibilisation à la sécurité bancaire et aux tests strictement autorisés.',tag:'Volume 1 · Sécurité bancaire'}
 ];
-const dvdGrid=document.getElementById('dvdGrid');products.forEach((p,i)=>{const card=document.createElement('article');card.className='card dvd';card.innerHTML=`<div class="visual"><img loading="lazy" src="images/${p.img}" alt="Couverture du DVD ${p.title}"></div><div class="card-body"><span class="tag">${p.tag}</span><h3>${p.title}</h3><p>${p.desc}</p><div class="price">Prix à confirmer</div><button class="btn order-btn" type="button">Commander sur WhatsApp ↗</button></div>`;card.querySelector('button').addEventListener('click',()=>{const message=`Bonjour Genesis Official School, je souhaite des informations et le prix du DVD : ${p.title}.`;window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,'_blank','noopener');});dvdGrid.appendChild(card)});
-document.getElementById('contactWhatsApp').href=`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Bonjour Genesis Official School, je souhaite obtenir des informations sur vos formations.')}`;
-document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('menuBtn').addEventListener('click',()=>document.getElementById('navlinks').classList.toggle('open'));document.querySelectorAll('#navlinks a').forEach(a=>a.addEventListener('click',()=>document.getElementById('navlinks').classList.remove('open')));
-const chatLog=document.getElementById('chatLog');document.getElementById('chatForm').addEventListener('submit',e=>{e.preventDefault();const input=document.getElementById('chatInput'),msg=input.value.trim();if(!msg)return;const user=document.createElement('div');user.className='bubble me';user.textContent=msg;chatLog.appendChild(user);const low=msg.toLowerCase();let answer='Merci pour ton message ! Pour confirmer les détails et les tarifs, écris directement à Genesis sur WhatsApp.';if(/dvd|disque|support/.test(low))answer='Tu peux consulter les couvertures dans la section « DVD disponibles ». Clique sur « Commander sur WhatsApp » pour demander le prix et la disponibilité.';else if(/formation|cours|apprendre|programme/.test(low))answer='Genesis présente des domaines comme la cybersécurité, les réseaux, la programmation et la protection des comptes. Contacte-nous sur WhatsApp pour connaître les programmes disponibles.';else if(/prix|tarif|coût|combien/.test(low))answer='Les prix ne sont pas encore indiqués sur le site. Utilise un bouton de commande WhatsApp pour demander le tarif actuel.';else if(/bonjour|salut|bonsoir|hello/.test(low))answer='Bonjour ! Bienvenue chez Genesis Official School. Tu peux explorer nos formations, consulter les DVD ou nous contacter sur WhatsApp.';const bot=document.createElement('div');bot.className='bubble';bot.textContent=answer;chatLog.appendChild(bot);chatLog.scrollTop=chatLog.scrollHeight;input.value='';});
-const STORAGE_KEY='genesis_demo_comments_v1';const initialComments=[{name:'Équipe Genesis',rating:5,text:'Bienvenue sur notre espace de démonstration. Apprendre, protéger et progresser !',date:'Démo'}];function safeLoad(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||initialComments}catch(e){return initialComments}}function renderComments(){const list=document.getElementById('commentList');list.replaceChildren();safeLoad().forEach(c=>{const el=document.createElement('article');el.className='comment';const head=document.createElement('div');const name=document.createElement('strong');name.textContent=c.name;const date=document.createElement('small');date.textContent=' · '+(c.date||'');const stars=document.createElement('div');stars.className='stars';stars.textContent='★'.repeat(Number(c.rating)||5)+'☆'.repeat(5-(Number(c.rating)||5));const body=document.createElement('p');body.textContent=c.text;head.append(name,date);el.append(head,stars,body);list.appendChild(el)})}renderComments();document.getElementById('commentForm').addEventListener('submit',e=>{e.preventDefault();const comments=safeLoad();comments.unshift({name:document.getElementById('commentName').value.trim(),rating:Number(document.getElementById('commentRating').value),text:document.getElementById('commentText').value.trim(),date:new Date().toLocaleDateString('fr-FR')});try{localStorage.setItem(STORAGE_KEY,JSON.stringify(comments.slice(0,30)))}catch(err){}renderComments();e.target.reset()});document.getElementById('clearComments').addEventListener('click',()=>{try{localStorage.removeItem(STORAGE_KEY)}catch(e){}renderComments()});
+
+const dvdGrid = document.getElementById('dvdGrid');
+
+products.forEach(p => {
+  const card = document.createElement('article');
+  card.className = 'card dvd';
+  card.innerHTML = `<div class="visual"><img loading="lazy" src="images/${p.img}" alt="Couverture du DVD ${p.title}"></div><div class="card-body"><span class="tag">${p.tag}</span><h3>${p.title}</h3><p>${p.desc}</p><div class="price">Prix à confirmer</div><button class="btn order-btn" type="button">Commander sur WhatsApp ↗</button></div>`;
+
+  card.querySelector('button').addEventListener('click', () => {
+    const message = `Bonjour Genesis Official School, je souhaite des informations et le prix du DVD : ${p.title}.`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+  });
+
+  dvdGrid.appendChild(card);
+});
+
+document.getElementById('contactWhatsApp').href =
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Bonjour Genesis Official School, je souhaite obtenir des informations sur vos formations.')}`;
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.getElementById('menuBtn').addEventListener('click', () => {
+  document.getElementById('navlinks').classList.toggle('open');
+});
+
+document.querySelectorAll('#navlinks a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navlinks').classList.remove('open');
+  });
+});
+
+// Assistant Genesis
+const chatLog = document.getElementById('chatLog');
+
+document.getElementById('chatForm').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  const user = document.createElement('div');
+  user.className = 'bubble me';
+  user.textContent = msg;
+  chatLog.appendChild(user);
+
+  const low = msg.toLowerCase();
+  let answer = 'Merci pour ton message ! Pour confirmer les détails et les tarifs, écris directement à Genesis sur WhatsApp.';
+
+  if (/dvd|disque|support/.test(low)) {
+    answer = 'Tu peux consulter les couvertures dans la section « DVD disponibles ».\nClique sur « Commander sur WhatsApp » pour demander le prix et la disponibilité.';
+  } else if (/formation|cours|apprendre|programme/.test(low)) {
+    answer = 'Genesis présente des domaines comme la cybersécurité, les réseaux, la programmation et la protection des comptes. Contacte-nous sur WhatsApp pour connaître les programmes disponibles.';
+  } else if (/prix|tarif|coût|combien/.test(low)) {
+    answer = 'Les prix ne sont pas encore indiqués sur le site.\nUtilise un bouton de commande WhatsApp pour demander le tarif actuel.';
+  } else if (/bonjour|salut|bonsoir|hello/.test(low)) {
+    answer = 'Bonjour ! Bienvenue chez Genesis Official School. Tu peux explorer nos formations, consulter les DVD ou nous contacter sur WhatsApp.';
+  }
+
+  const bot = document.createElement('div');
+  bot.className = 'bubble';
+  bot.textContent = answer;
+  chatLog.appendChild(bot);
+  chatLog.scrollTop = chatLog.scrollHeight;
+  input.value = '';
+});
+
+// Commentaires de démonstration
+const STORAGE_KEY = 'genesis_demo_comments_v1';
+
+const initialComments = [{
+  name: 'Équipe Genesis',
+  rating: 5,
+  text: 'Bienvenue sur notre espace de démonstration.\nApprendre, protéger et progresser !',
+  date: 'Démo'
+}];
+
+function safeLoad() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || initialComments;
+  } catch (e) {
+    return initialComments;
+  }
+}
+
+function renderComments() {
+  const list = document.getElementById('commentList');
+  list.replaceChildren();
+
+  safeLoad().forEach(c => {
+    const el = document.createElement('article');
+    el.className = 'comment';
+
+    const head = document.createElement('div');
+    const name = document.createElement('strong');
+    name.textContent = c.name;
+
+    const date = document.createElement('small');
+    date.textContent = ' · ' + (c.date || '');
+
+    const stars = document.createElement('div');
+    stars.className = 'stars';
+    const rating = Math.max(1, Math.min(5, Number(c.rating) || 5));
+    stars.textContent = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+
+    const body = document.createElement('p');
+    body.textContent = c.text;
+
+    head.append(name, date);
+    el.append(head, stars, body);
+    list.appendChild(el);
+  });
+}
+
+renderComments();
+
+document.getElementById('commentForm').addEventListener('submit', e => {
+  e.preventDefault();
+
+  const comments = safeLoad();
+  comments.unshift({
+    name: document.getElementById('commentName').value.trim(),
+    rating: Number(document.getElementById('commentRating').value),
+    text: document.getElementById('commentText').value.trim(),
+    date: new Date().toLocaleDateString('fr-FR')
+  });
+
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(comments.slice(0, 30)));
+  } catch (err) {}
+
+  renderComments();
+  e.target.reset();
+});
+
+document.getElementById('clearComments').addEventListener('click', () => {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {}
+
+  renderComments();
+});
+
 </script></body></html>
